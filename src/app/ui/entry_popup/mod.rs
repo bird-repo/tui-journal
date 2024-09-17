@@ -65,10 +65,10 @@ impl<'a> EntryPopup<'a> {
         let date = Local::now();
 
         let date_txt = TextArea::new(vec![format!(
-            "{:02}-{:02}-{}",
-            date.day(),
+            "{}-{:02}-{:02}",
+            date.year(),
             date.month(),
-            date.year()
+            date.day()
         )]);
 
         let tags_txt = TextArea::default();
@@ -329,7 +329,7 @@ impl<'a> EntryPopup<'a> {
     }
 
     fn validate_date(&mut self) {
-        if let Err(err) = NaiveDate::parse_from_str(self.date_txt.lines()[0].as_str(), "%d-%m-%Y") {
+        if let Err(err) = NaiveDate::parse_from_str(self.date_txt.lines()[0].as_str(), "%Y-%m-%d") {
             self.date_err_msg = err.to_string();
         } else {
             self.date_err_msg.clear();
@@ -465,7 +465,7 @@ impl<'a> EntryPopup<'a> {
         }
 
         let title = self.title_txt.lines()[0].to_owned();
-        let date = NaiveDate::parse_from_str(self.date_txt.lines()[0].as_str(), "%d-%m-%Y")
+        let date = NaiveDate::parse_from_str(self.date_txt.lines()[0].as_str(), "%Y-%m-%d")
             .expect("Date must be valid here");
 
         let date = Utc
