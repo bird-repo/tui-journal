@@ -357,7 +357,7 @@ impl<'a> Editor<'a> {
 
         self.text_area.set_block(
             Block::default()
-                .borders(Borders::ALL)
+                .borders(Borders::NONE)
                 .style(text_block_style)
                 .title(title),
         );
